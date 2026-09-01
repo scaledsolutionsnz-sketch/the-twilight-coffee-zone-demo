@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Twilight Coffee Zone | Coffee &amp; Burgers, Dannevirke</title>
+<meta name="description" content="Early coffee, proper burgers, toasties, donuts and thickshakes at 107 Miller Street, Dannevirke. Open from 6am weekdays, burger nights Wednesday to Friday.">
+<meta property="og:title" content="The Twilight Coffee Zone | Coffee &amp; Burgers, Dannevirke">
+<meta property="og:description" content="Early coffee, proper burgers, toasties, donuts and thickshakes on Miller Street, Dannevirke.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/hero-burger.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314182e'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23e8a34f' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#14182e;
+  --night-2:#1b2140;
+  --night-3:#101426;
+  --paper:#f2f3f8;
+  --paper-2:#fafbfe;
+  --ink:#1a1e34;
+  --ink-soft:#4c5168;
+  --accent:#e8a34f;
+  --accent-deep:#94601c;
+  --line:rgba(26,30,52,.12);
+  --line-light:rgba(244,240,232,.16);
+  --radius:14px;
+  --shadow:0 14px 34px -14px rgba(20,24,46,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+img{image-orientation:from-image;max-width:100%;display:block}
+body{
+  font-family:"Albert Sans",sans-serif;
+  color:var(--ink);
+  background:var(--paper-2);
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:var(--night)}
+h1,h2,h3{font-family:"Syne",sans-serif;line-height:1.12;color:var(--ink)}
+a{color:inherit}
+
+/* ---------- intro overlay ---------- */
+.intro{
+  position:fixed;inset:0;z-index:200;background:var(--night);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+.intro.gone{opacity:0;visibility:hidden;pointer-events:none}
+.intro span{
+  font-family:"Syne",sans-serif;font-weight:700;font-size:1.35rem;color:#f4f2ec;
+  opacity:0;transform:translateY(14px);animation:introUp .8s .15s cubic-bezier(.16,1,.3,1) forwards;
+}
+.intro em{color:var(--accent);font-style:normal}
+@keyframes introUp{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .intro{display:none}
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(20,24,46,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-light);
+}
+.nav-in{
+  max-width:1160px;margin:0 auto;padding:0 20px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{
+  font-family:"Syne",sans-serif;font-weight:700;font-size:1.02rem;letter-spacing:.02em;
+  color:#f4f2ec;text-decoration:none;white-space:nowrap;
+}
+.brand em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+.nav-links a{
+  color:#d9dbe6;text-decoration:none;font-size:.95rem;font-weight:500;
+  transition:color .25s ease;
+}
+.nav-links a:hover{color:var(--accent)}
+.nav-call{
+  display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;
+  border:1px solid rgba(232,163,79,.55);border-radius:999px;color:#f4f2ec;
+  text-decoration:none;font-weight:600;font-size:.9rem;line-height:1;
+  transition:background .25s ease,color .25s ease;white-space:nowrap;
+}
+.nav-call:hover{background:var(--accent);color:var(--night);border-color:var(--accent)}
+.nav-call svg{flex:none}
+.burger{
+  display:none;background:none;border:0;cursor:pointer;padding:10px;
+}
+.burger span{display:block;width:24px;height:2px;background:#f4f2ec;margin:5px 0;transition:transform .3s ease,opacity .3s ease}
+.mobile-menu{
+  display:none;background:var(--night-3);border-bottom:1px solid var(--line-light);
+  padding:10px 20px 22px;
+}
+.mobile-menu.open{display:block}
+.mobile-menu a{
+  display:flex;align-items:center;min-height:48px;color:#e7e8ef;text-decoration:none;
+  font-size:1.05rem;font-weight:500;border-bottom:1px solid rgba(244,240,232,.08);
+}
+.mobile-menu a:last-child{border-bottom:0}
+.mobile-menu a.mm-call{color:var(--accent);font-weight:700}
+@media (max-width:840px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-call{display:none}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100dvh;background:var(--night);
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;color:#f4f2ec;
+}
+.hero-slides{position:absolute;inset:0}
+.hero-slides img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1.6s ease;
+}
+.hero-slides img.on{opacity:1}
+.hero-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,24,46,.72) 0%,rgba(20,24,46,.5) 45%,rgba(16,20,38,.88) 100%);
+}
+.hero-in{
+  position:relative;z-index:2;max-width:1160px;margin:0 auto;width:100%;
+  padding:120px 20px 64px;
+}
+.hero-eyebrow{
+  font-size:.85rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.hero h1{
+  color:#f7f5ef;font-size:clamp(2.5rem,6vw,4.1rem);font-weight:800;
+  max-width:15ch;margin-bottom:20px;letter-spacing:-.01em;
+}
+.hero-sub{
+  font-size:1.12rem;color:#d5d7e2;max-width:44ch;margin-bottom:32px;
+}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:52px;padding:0 28px;border-radius:999px;text-decoration:none;
+  font-weight:700;font-size:1rem;line-height:1;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,color .25s ease;
+}
+.btn:active{transform:scale(.98)}
+.btn-solid{background:var(--accent);color:#241703}
+.btn-solid:hover{background:#f0b364;box-shadow:0 12px 26px -10px rgba(232,163,79,.55)}
+.btn-ghost{border:1.5px solid rgba(244,242,236,.55);color:#f4f2ec}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-quote{
+  max-width:430px;border:1px solid rgba(244,242,236,.22);border-radius:var(--radius);
+  background:rgba(20,24,46,.42);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:18px 22px;min-height:118px;
+}
+.hero-quote .stars{color:var(--accent);letter-spacing:2px;font-size:.9rem}
+.hero-quote blockquote{
+  font-size:.98rem;color:#e9eaf1;margin:6px 0 4px;font-style:italic;
+  transition:opacity .5s ease;
+}
+.hero-quote cite{font-style:normal;font-size:.85rem;color:#b9bcce;font-weight:600}
+
+/* ---------- sections ---------- */
+section{padding:96px 0}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.sec-head{max-width:640px;margin-bottom:52px}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700;margin-bottom:14px}
+.sec-head p{color:var(--ink-soft);font-size:1.05rem}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* services */
+.services{background:var(--paper)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.svc{
+  background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  transition:transform .3s ease,box-shadow .3s ease;display:flex;flex-direction:column;
+}
+.svc:hover{transform:translateY(-6px);box-shadow:0 22px 44px -16px rgba(20,24,46,.34)}
+.svc-img{aspect-ratio:4/3;overflow:hidden}
+.svc-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);transition:transform .5s ease}
+.svc:hover .svc-img img{transform:scale(1.045)}
+.svc-body{padding:22px 24px 26px}
+.svc-tag{
+  display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:8px;
+}
+.svc-tag svg{flex:none}
+.svc h3{font-size:1.22rem;font-weight:700;margin-bottom:8px}
+.svc p{font-size:.95rem;color:var(--ink-soft)}
+
+/* about */
+.about{background:var(--paper-2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about-photo{position:relative}
+.about-photo img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);
+  filter:saturate(.85) contrast(1.05);box-shadow:var(--shadow);
+}
+.about-corner{
+  position:absolute;left:-14px;bottom:-14px;background:var(--night);color:#f4f2ec;
+  border-radius:12px;padding:14px 20px;font-family:"Syne",sans-serif;font-weight:700;
+  font-size:.95rem;line-height:1.35;box-shadow:var(--shadow);
+}
+.about-corner strong{color:var(--accent);display:block;font-size:1.15rem}
+.about-copy h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:18px}
+.about-copy p{color:var(--ink-soft);margin-bottom:16px;max-width:56ch}
+.checks{list-style:none;margin-top:26px;display:grid;gap:14px}
+.checks li{display:flex;gap:12px;align-items:flex-start;font-weight:600;color:var(--ink)}
+.checks svg{flex:none;margin-top:3px;color:var(--accent-deep)}
+
+/* crew */
+.crew{background:var(--paper)}
+.crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:880px}
+.crew-card{
+  background:#fff;border-radius:var(--radius);padding:30px 24px;text-align:center;
+  box-shadow:var(--shadow);transition:transform .3s ease;
+}
+.crew-card:hover{transform:translateY(-5px)}
+.avatar{
+  width:84px;height:84px;border-radius:50%;margin:0 auto 16px;
+  background:var(--night);border:3px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Syne",sans-serif;font-weight:700;font-size:1.5rem;color:#f4f2ec;
+}
+.crew-card h3{font-size:1.1rem;margin-bottom:4px}
+.crew-role{font-size:.86rem;font-weight:600;color:var(--accent-deep);letter-spacing:.04em}
+.crew-note{margin-top:22px;font-size:.86rem;color:var(--ink-soft)}
+
+/* reviews */
+.reviews{background:var(--paper-2)}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.rev{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px 30px;box-shadow:var(--shadow);
+}
+.rev.wide{grid-column:span 2}
+.rev .stars{color:var(--accent-deep);letter-spacing:2px;margin-bottom:12px;font-size:.95rem}
+.rev p{font-size:1.02rem;color:var(--ink);margin-bottom:14px}
+.rev.wide p{font-size:1.18rem;font-family:"Syne",sans-serif;font-weight:600;line-height:1.45}
+.rev-by{font-size:.88rem;color:var(--ink-soft);font-weight:600}
+.rev-actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px}
+.btn-navy{background:var(--night);color:#f4f2ec}
+.btn-navy:hover{background:var(--night-2);box-shadow:0 12px 26px -12px rgba(20,24,46,.5)}
+
+/* review banner */
+.banner{background:var(--night);color:#f4f2ec;padding:72px 0}
+.banner-in{
+  max-width:1160px;margin:0 auto;padding:0 20px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:26px;
+}
+.banner h2{color:#f7f5ef;font-size:clamp(1.6rem,3vw,2.2rem);max-width:20ch}
+.banner p{color:#c3c6d6;margin-top:8px;max-width:44ch}
+
+/* contact */
+.contact{background:var(--night-3);padding:96px 0}
+.contact .sec-head h2{color:#f7f5ef}
+.contact .sec-head p{color:#c3c6d6}
+.contact-card{
+  background:var(--night-2);border:1px solid var(--line-light);border-radius:18px;
+  overflow:hidden;display:grid;grid-template-columns:1fr 1fr;
+}
+.map-col{min-height:460px}
+.map-col iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.9)}
+.info-col{padding:40px 42px;color:#e7e8ef;display:flex;flex-direction:column;gap:0}
+.info-col .btn{width:100%;margin-bottom:14px}
+.info-rows{margin-top:20px;display:grid;gap:16px}
+.info-row{display:flex;gap:14px;align-items:flex-start;font-size:.96rem}
+.info-row svg{flex:none;margin-top:3px;color:var(--accent)}
+.info-row a{color:#e7e8ef;text-decoration:none}
+.info-row a:hover{color:var(--accent)}
+.info-row .lbl{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#9aa0b8;font-weight:700;margin-bottom:2px}
+.hours{line-height:1.6}
+.socials{display:flex;gap:12px;margin-top:26px}
+.socials a{
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,242,236,.25);
+  display:inline-flex;align-items:center;justify-content:center;color:#e7e8ef;
+  transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+.socials a:hover{background:var(--accent);color:var(--night);border-color:var(--accent)}
+
+/* footer */
+footer{background:var(--night-3);border-top:1px solid var(--line-light);padding:44px 0;color:#9aa0b8}
+.foot-in{
+  max-width:1160px;margin:0 auto;padding:0 20px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:22px;
+}
+.foot-brand{font-family:"Syne",sans-serif;font-weight:700;color:#f4f2ec;font-size:1rem;text-decoration:none}
+.foot-brand em{font-style:normal;color:var(--accent)}
+.foot-links{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
+.foot-links a{color:#9aa0b8;text-decoration:none;font-size:.9rem}
+.foot-links a:hover{color:var(--accent)}
+.foot-social{display:flex;gap:10px}
+.foot-social a{
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(244,242,236,.18);
+  display:inline-flex;align-items:center;justify-content:center;color:#c3c6d6;
+  transition:background .25s ease,color .25s ease;
+}
+.foot-social a:hover{background:var(--accent);color:var(--night)}
+.foot-note{width:100%;font-size:.84rem;border-top:1px solid rgba(244,242,236,.08);padding-top:20px;margin-top:8px}
+
+/* responsive */
+@media (max-width:960px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:44px}
+  .contact-card{grid-template-columns:1fr}
+  .map-col{min-height:320px;order:2}
+  .info-col{order:1}
+}
+@media (max-width:640px){
+  section{padding:72px 0}
+  .svc-grid{grid-template-columns:1fr}
+  .crew-grid{grid-template-columns:1fr;max-width:420px}
+  .rev-grid{grid-template-columns:1fr}
+  .rev.wide{grid-column:span 1}
+  .rev.wide p{font-size:1.05rem}
+  .hero-in{padding:110px 20px 56px}
+  .hero-sub{font-size:1.02rem}
+  .info-col{padding:30px 22px}
+  .about-corner{left:10px;bottom:-14px}
+}
+</style>
+</head>
+<body>
+
+<div class="intro" id="intro" aria-hidden="true"><span>The Twilight <em>Coffee Zone</em></span></div>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">The Twilight <em>Coffee Zone</em></a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Find us</a></li>
+    </ul>
+    <a class="nav-call" href="tel:+64284087608">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      028 408 7608
+    </a>
+    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Find us</a>
+    <a class="mm-call" href="tel:+64284087608">Call 028 408 7608</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0">
+    <div class="hero-slides" aria-hidden="true">
+      <img src="img/hero-burger.jpg" alt="" class="on" fetchpriority="high" width="1600" height="1329">
+      <img src="img/hero-pour.jpg" alt="" loading="lazy" width="1600" height="1067">
+      <img src="img/hero-beans.jpg" alt="" loading="lazy" width="1600" height="1221">
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-in">
+      <p class="hero-eyebrow">Coffee &amp; takeaways, Miller Street, Dannevirke</p>
+      <h1>Early coffee. Proper burgers.</h1>
+      <p class="hero-sub">Open from 6am for coffee, pies and toasties. Burger nights Wednesday to Friday, 5pm to 7pm.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="tel:+64284087608">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call ahead
+        </a>
+        <a class="btn btn-ghost" href="#contact">Find us</a>
+      </div>
+      <div class="hero-quote">
+        <div class="stars" aria-label="Five star review">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote id="heroQuote">Curly fries and donuts are unmatched! Their burgers are delicious too, best in town.</blockquote>
+        <cite id="heroCite">A U, Google review</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="menu">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Off the grill and out of the machine</h2>
+        <p>Everything is made to order at the counter on Miller Street. Grab it to go, or call ahead and skip the wait.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc reveal">
+          <div class="svc-img"><img src="img/card-coffee.jpg" alt="Flat white with latte art on a cafe table" loading="lazy" width="900" height="1350"></div>
+          <div class="svc-body">
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/></svg>Barista made</span>
+            <h3>Coffee</h3>
+            <p>Flat whites, long blacks and mochas from 6am sharp. The first stop for Dannevirke's early starters.</p>
+          </div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="img/card-burger.jpg" alt="Two stacked beef burgers on a wooden board" loading="lazy" width="900" height="1125"></div>
+          <div class="svc-body">
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16a2 2 0 0 0-2-6H6a2 2 0 0 0-2 6Z"/><path d="M3 14h18"/><path d="M4 18h16a2 2 0 0 0 2-2v-2H2v2a2 2 0 0 0 2 2Z"/></svg>Wed to Fri nights</span>
+            <h3>Burgers</h3>
+            <p>Beef, chicken and the spicy chicken combo locals rate as the best in town. Fresh to order, every time.</p>
+          </div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="img/card-toastie.jpg" alt="Grilled toastie cut in half with dipping sauces" loading="lazy" width="900" height="599"></div>
+          <div class="svc-body">
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18"/></svg>Lunch favourite</span>
+            <h3>Toasties</h3>
+            <p>Golden, pressed and packed with fillings. The quick lunch that gets you back on the road in minutes.</p>
+          </div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="img/card-fries.jpg" alt="Basket of hot fries wrapped in paper" loading="lazy" width="900" height="1350"></div>
+          <div class="svc-body">
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10l2-13H5Z"/><path d="M9 8V4m3 4V3m3 5V4"/></svg>Hot chips</span>
+            <h3>Curly fries</h3>
+            <p>Crisp, seasoned and famously hard to share. Regulars call them unmatched, and they would know.</p>
+          </div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="img/card-donuts.jpg" alt="Stack of chocolate glazed donuts with sprinkles" loading="lazy" width="900" height="1125"></div>
+          <div class="svc-body">
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Fresh baked</span>
+            <h3>Donuts</h3>
+            <p>Glazed, filled and made for the smoko run. Pair one with a flat white and the morning sorts itself out.</p>
+          </div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="img/card-shake.jpg" alt="Loaded chocolate thickshake in a glass jar" loading="lazy" width="900" height="601"></div>
+          <div class="svc-body">
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 5H9Z"/><path d="M9 7l1.5 14h3L15 7"/></svg>Thick and cold</span>
+            <h3>Thickshakes</h3>
+            <p>Proper thickshakes in the classic flavours, blended so thick the straw stands up on its own.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <img src="img/about.jpg" alt="Three coffees held together over a cafe table" loading="lazy" width="900" height="600">
+          <div class="about-corner"><strong>6am</strong>doors open weekdays</div>
+        </div>
+        <div class="about-copy reveal">
+          <h2>The early stop on Miller Street</h2>
+          <p>The Twilight Coffee Zone is a locally owned takeaway in the middle of Dannevirke. The coffee machine is running before sunrise for farmers, tradies and anyone heading down State Highway 2 with a long drive ahead.</p>
+          <p>Through the week it is coffee, pies, toasties and donuts. From Wednesday to Friday the grill fires back up at 5pm for burger nights, and the spicy chicken combo has built a following of its own.</p>
+          <ul class="checks">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Locally owned and run in Dannevirke</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Open from 6am on weekdays</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Everything cooked fresh to order</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREW -->
+  <section class="crew">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Behind the counter</h2>
+        <p>A small crew that knows the regulars by name and the orders by heart.</p>
+      </div>
+      <div class="crew-grid">
+        <div class="crew-card reveal">
+          <div class="avatar">IK</div>
+          <h3>Ike</h3>
+          <div class="crew-role">Owner Operator</div>
+        </div>
+        <div class="crew-card reveal">
+          <div class="avatar">CC</div>
+          <h3>Counter &amp; Coffee</h3>
+          <div class="crew-role">Front of house</div>
+        </div>
+        <div class="crew-card reveal">
+          <div class="avatar">GR</div>
+          <h3>Grill</h3>
+          <div class="crew-role">Burger nights</div>
+        </div>
+      </div>
+      <p class="crew-note reveal">Example team layout. Photos and names can be swapped in before launch.</p>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Rated 4.9 on Google</h2>
+        <p>Real reviews from the people who eat here.</p>
+      </div>
+      <div class="rev-grid">
+        <article class="rev wide reveal">
+          <div class="stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Honestly the best burgers in all NZ. I tasted heaps, this place 100%."</p>
+          <div class="rev-by">Holidaying around NZ, Restaurant Guru</div>
+        </article>
+        <article class="rev reveal">
+          <div class="stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Curly fries and donuts are unmatched! Their burgers are delicious too, best in town."</p>
+          <div class="rev-by">A U, Google review</div>
+        </article>
+        <article class="rev reveal">
+          <div class="stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Had the spicy chicken burger combo. One of the yummiest burgers I've had in a very long time."</p>
+          <div class="rev-by">Les Kennington, Google review</div>
+        </article>
+      </div>
+      <div class="rev-actions reveal">
+        <a class="btn btn-navy" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Twilight%20Coffee%20Zone%20107%20Miller%20St%20Dannevirke" target="_blank" rel="noopener">See all our Google reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW BANNER -->
+  <section class="banner">
+    <div class="banner-in">
+      <div class="reveal">
+        <h2>Happy with your order?</h2>
+        <p>A quick Google review helps other hungry travellers find us on the way through.</p>
+      </div>
+      <a class="btn btn-solid reveal" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Twilight%20Coffee%20Zone%20107%20Miller%20St%20Dannevirke" target="_blank" rel="noopener">Leave us a review</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Find us on Miller Street</h2>
+        <p>Right in the middle of Dannevirke, an easy pull-over off State Highway 2.</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="map-col">
+          <iframe title="Map of The Twilight Coffee Zone, 107 Miller Street, Dannevirke" src="https://www.google.com/maps?q=The%20Twilight%20Coffee%20Zone%2C%20107%20Miller%20Street%2C%20Dannevirke%204930&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <div class="info-col">
+          <a class="btn btn-solid" href="tel:+64284087608">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call The Twilight Coffee Zone
+          </a>
+          <a class="btn btn-ghost" data-gmail data-user="twilightcoffeezone" data-domain="gmail.com" data-su="Order%20enquiry" href="#contact">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            Email The Twilight Coffee Zone
+          </a>
+          <div class="info-rows">
+            <div class="info-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><span class="lbl">Address</span>107 Miller Street, Dannevirke 4930</div>
+            </div>
+            <div class="info-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div><span class="lbl">Phone</span><a href="tel:+64284087608">028 408 7608</a></div>
+            </div>
+            <div class="info-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <div class="hours"><span class="lbl">Hours</span>
+                Mon &amp; Tue: 6am to 1:30pm<br>
+                Wed to Fri: 6am to 2pm, 5pm to 7pm<br>
+                Sat &amp; Sun: closed
+              </div>
+            </div>
+          </div>
+          <div class="socials">
+            <a href="https://www.facebook.com/Twilightcoffeezone/" target="_blank" rel="noopener" aria-label="The Twilight Coffee Zone on Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16.7V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.5v7Z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/explore/search/keyword/?q=twilight%20coffee%20zone" target="_blank" rel="noopener" aria-label="Search The Twilight Coffee Zone on Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <a class="foot-brand" href="#top">The Twilight <em>Coffee Zone</em></a>
+    <ul class="foot-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="terms.html">Terms &amp; Conditions</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+    </ul>
+    <div class="foot-social">
+      <a href="https://www.facebook.com/Twilightcoffeezone/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16.7V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.5v7Z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/explore/search/keyword/?q=twilight%20coffee%20zone" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="foot-note">&copy; <span id="year">2026</span> The Twilight Coffee Zone, 107 Miller Street, Dannevirke. Demo website by Scaled Solutions.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // intro overlay
+  var intro = document.getElementById('intro');
+  if(intro){
+    window.addEventListener('load', function(){
+      setTimeout(function(){ intro.classList.add('gone'); }, 900);
+    });
+    setTimeout(function(){ intro.classList.add('gone'); }, 2600);
+  }
+
+  // mobile menu
+  var btn = document.getElementById('burgerBtn');
+  var menu = document.getElementById('mobileMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(){
+      var open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+    });
+  }
+
+  // hero slide rotation
+  var slides = document.querySelectorAll('.hero-slides img');
+  if(slides.length > 1 && !reduced){
+    var si = 0;
+    setInterval(function(){
+      slides[si].classList.remove('on');
+      si = (si + 1) % slides.length;
+      slides[si].classList.add('on');
+    }, 6000);
+  }
+
+  // hero review quote rotation (same data as the review cards)
+  var quotes = [
+    {t:'Curly fries and donuts are unmatched! Their burgers are delicious too, best in town.', by:'A U, Google review'},
+    {t:'Had the spicy chicken burger combo. One of the yummiest burgers I\'ve had in a very long time.', by:'Les Kennington, Google review'},
+    {t:'Honestly the best burgers in all NZ. I tasted heaps, this place 100%.', by:'Holidaying around NZ, Restaurant Guru'}
+  ];
+  var qEl = document.getElementById('heroQuote');
+  var cEl = document.getElementById('heroCite');
+  if(qEl && cEl && !reduced){
+    var qi = 0;
+    setInterval(function(){
+      qEl.style.opacity = '0';
+      setTimeout(function(){
+        qi = (qi + 1) % quotes.length;
+        qEl.textContent = quotes[qi].t;
+        cEl.textContent = quotes[qi].by;
+        qEl.style.opacity = '1';
+      }, 500);
+    }, 6500);
+  }
+
+  // scroll reveals
+  var revealed = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.14});
+    revealed.forEach(function(el){ io.observe(el); });
+  } else {
+    revealed.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // gmail compose buttons
+  document.querySelectorAll('a[data-gmail]').forEach(function(a){
+    var to = a.getAttribute('data-user') + '@' + a.getAttribute('data-domain');
+    a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + (a.getAttribute('data-su')||'') + '&body=' + (a.getAttribute('data-body')||'');
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  var y = document.getElementById('year');
+  if(y){ y.textContent = new Date().getFullYear(); }
+})();
+</script>
+</body>
+</html>
