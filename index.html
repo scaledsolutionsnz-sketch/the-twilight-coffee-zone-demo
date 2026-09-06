@@ -8,8 +8,8 @@
 <meta property="og:title" content="The Twilight Coffee Zone | Coffee &amp; Burgers, Dannevirke">
 <meta property="og:description" content="Early coffee, proper burgers, toasties, donuts and thickshakes on Miller Street, Dannevirke.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="img/hero-burger.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314182e'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23e8a34f' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="img/trailer-day.jpg">
+<link rel="icon" type="image/png" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -52,6 +52,11 @@ a{color:inherit}
   transition:opacity .7s ease,visibility .7s ease;
 }
 .intro.gone{opacity:0;visibility:hidden;pointer-events:none}
+.intro{flex-direction:column;gap:20px}
+.intro img{
+  width:clamp(96px,15vw,150px);height:auto;border-radius:50%;
+  opacity:0;transform:scale(.86);animation:introUp .8s .05s cubic-bezier(.16,1,.3,1) forwards;
+}
 .intro span{
   font-family:"Syne",sans-serif;font-weight:700;font-size:1.35rem;color:#f4f2ec;
   opacity:0;transform:translateY(14px);animation:introUp .8s .15s cubic-bezier(.16,1,.3,1) forwards;
@@ -73,9 +78,11 @@ a{color:inherit}
   display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
 .brand{
+  display:flex;align-items:center;gap:10px;
   font-family:"Syne",sans-serif;font-weight:700;font-size:1.02rem;letter-spacing:.02em;
   color:#f4f2ec;text-decoration:none;white-space:nowrap;
 }
+.brand img{height:44px;width:44px;border-radius:50%;display:block}
 .brand em{font-style:normal;color:var(--accent)}
 .nav-links{display:flex;align-items:center;gap:26px;list-style:none}
 .nav-links a{
@@ -203,7 +210,7 @@ section{padding:96px 0}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .about-photo{position:relative}
 .about-photo img{
-  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);
+  width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);
   filter:saturate(.85) contrast(1.05);box-shadow:var(--shadow);
 }
 .about-corner{
@@ -332,11 +339,14 @@ footer{background:var(--night-3);border-top:1px solid var(--line-light);padding:
 </head>
 <body>
 
-<div class="intro" id="intro" aria-hidden="true"><span>The Twilight <em>Coffee Zone</em></span></div>
+<div class="intro" id="intro" aria-hidden="true">
+  <img src="img/logo.png" alt="" width="360" height="360">
+  <span>The Twilight <em>Coffee Zone</em></span>
+</div>
 
 <header class="nav">
   <div class="nav-in">
-    <a class="brand" href="#top">The Twilight <em>Coffee Zone</em></a>
+    <a class="brand" href="#top"><img src="img/logo.png" alt="" width="360" height="360">The Twilight <em>Coffee Zone</em></a>
     <ul class="nav-links">
       <li><a href="#menu">Menu</a></li>
       <li><a href="#about">About</a></li>
@@ -365,9 +375,9 @@ footer{background:var(--night-3);border-top:1px solid var(--line-light);padding:
   <!-- HERO -->
   <section class="hero" style="padding:0">
     <div class="hero-slides" aria-hidden="true">
-      <img src="img/hero-burger.jpg" alt="" class="on" fetchpriority="high" width="1600" height="1329">
-      <img src="img/hero-pour.jpg" alt="" loading="lazy" width="1600" height="1067">
-      <img src="img/hero-beans.jpg" alt="" loading="lazy" width="1600" height="1221">
+      <img src="img/trailer-day.jpg" alt="" class="on" fetchpriority="high" width="1800" height="1350">
+      <img src="img/cart-night.jpg" alt="" loading="lazy" width="1800" height="1350">
+      <img src="img/hero-burger.jpg" alt="" loading="lazy" width="1600" height="1329">
     </div>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-in">
@@ -406,7 +416,7 @@ footer{background:var(--night-3);border-top:1px solid var(--line-light);padding:
           </div>
         </article>
         <article class="svc reveal">
-          <div class="svc-img"><img src="img/card-burger.jpg" alt="Two stacked beef burgers on a wooden board" loading="lazy" width="900" height="1125"></div>
+          <div class="svc-img"><img src="img/burgers.jpg" alt="Three crumbed chicken burgers in takeaway boxes" loading="lazy" width="1400" height="788"></div>
           <div class="svc-body">
             <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16a2 2 0 0 0-2-6H6a2 2 0 0 0-2 6Z"/><path d="M3 14h18"/><path d="M4 18h16a2 2 0 0 0 2-2v-2H2v2a2 2 0 0 0 2 2Z"/></svg>Wed to Fri nights</span>
             <h3>Burgers</h3>
@@ -414,11 +424,11 @@ footer{background:var(--night-3);border-top:1px solid var(--line-light);padding:
           </div>
         </article>
         <article class="svc reveal">
-          <div class="svc-img"><img src="img/card-toastie.jpg" alt="Grilled toastie cut in half with dipping sauces" loading="lazy" width="900" height="599"></div>
+          <div class="svc-img"><img src="img/pies.jpg" alt="Tray of golden pies fresh out of the oven with cheese bubbling over" loading="lazy" width="1400" height="788"></div>
           <div class="svc-body">
-            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18"/></svg>Lunch favourite</span>
-            <h3>Toasties</h3>
-            <p>Golden, pressed and packed with fillings. The quick lunch that gets you back on the road in minutes.</p>
+            <span class="svc-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18"/></svg>Baked here</span>
+            <h3>Pies &amp; toasties</h3>
+            <p>Flaky pies with the cheese bubbling over, pressed toasties and sausage rolls. The quick lunch that gets you back on the road.</p>
           </div>
         </article>
         <article class="svc reveal">
@@ -454,7 +464,7 @@ footer{background:var(--night-3);border-top:1px solid var(--line-light);padding:
     <div class="wrap">
       <div class="about-grid">
         <div class="about-photo reveal">
-          <img src="img/about.jpg" alt="Three coffees held together over a cafe table" loading="lazy" width="900" height="600">
+          <img src="img/cart-day.jpg" alt="The Twilight Coffee Zone cart with its menu boards and outdoor seating" loading="lazy" width="1800" height="1350">
           <div class="about-corner"><strong>6am</strong>doors open weekdays</div>
         </div>
         <div class="about-copy reveal">
